@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  // previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Technology {
+  id       Int                 @id @default(autoincrement())
+  name     String
+  color    String
+  icon     String?
+  // # Relacionamento inverso com Project
+  projects ProjectTechnology[]
+}
+
+model Challenge {
+  id        Int      @id @default(autoincrement())
+  title     String
+  text      String
+  project   Project? @relation(fields: [projectId], references: [id])
+  projectId Int?
+}
+
+model Project {
+  id              Int      @id @default(autoincrement())
+  title           String
+  description     String
+  images          String[]
+  link            String
+  created         DateTime @default(now())
+  fastDescription String
+  overview        String
+
+  // # Relacionamentos
+  technologies ProjectTechnology[]
+  challenges   Challenge[]
+}
+
+// # Tabela de junção N:N entre Project e Technology
+model ProjectTechnology {
+  id           Int        @id @default(autoincrement())
+  projectId    Int
+  technologyId Int
+  project      Project    @relation(fields: [projectId], references: [id])
+  technology   Technology @relation(fields: [technologyId], references: [id])
+}
