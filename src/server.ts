@@ -1,16 +1,22 @@
 import Fastify from 'fastify';
 import swagger from '@fastify/swagger';
 import swaggerUi from '@fastify/swagger-ui';
+import fastifyCors from '@fastify/cors';
+import { authRoute } from './routes/loginCallback.js';
+import 'dotenv/config';
+import cookie from '@fastify/cookie';
 
 // Create a Fastify instance
 const app = Fastify({
   logger: true,
 });
 
-// Declare a route
-// fastify.get('/', async function handler(request, reply) {
-//   return { hello: 'world' };
-// });
+//server Config
+app.register(fastifyCors);
+app.register(cookie, {
+  secret: process.env.JWT_SECRET as string,
+  parseOptions: {},
+});
 
 //Server Docs
 app.register(swagger, {
@@ -27,7 +33,10 @@ app.register(swaggerUi, {
   routePrefix: '/docs',
 });
 
-//Server Listneer
+//Routes
+app.register(authRoute);
+
+//Server Listener
 try {
   await app.listen({ port: 3000 });
 } catch (err) {
