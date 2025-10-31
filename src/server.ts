@@ -5,6 +5,7 @@ import fastifyCors from '@fastify/cors';
 import { authRoute } from './routes/loginCallback.js';
 import 'dotenv/config';
 import cookie from '@fastify/cookie';
+import { technologiesRoutes } from './controllers/technology.controller.js';
 
 // Create a Fastify instance
 const app = Fastify({
@@ -35,10 +36,12 @@ app.register(swaggerUi, {
 
 //Routes
 app.register(authRoute);
+app.register(technologiesRoutes);
 
 //Server Listener
 try {
   await app.listen({ port: 3000 });
+  console.log(`🚀 Server is running on http://localhost:3000`);
 } catch (err) {
   app.log.error(err);
   process.exit(1);
