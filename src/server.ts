@@ -6,6 +6,7 @@ import { authRoute } from './routes/loginCallback.js';
 import 'dotenv/config';
 import cookie from '@fastify/cookie';
 import { technologiesRoutes } from './controllers/technology.controller.js';
+import { projectRoutes } from './controllers/project.controller.js';
 
 // Create a Fastify instance
 const app = Fastify({
@@ -37,6 +38,7 @@ app.register(swaggerUi, {
 //Routes
 app.register(authRoute);
 app.register(technologiesRoutes);
+app.register(projectRoutes);
 
 //Server Listener
 try {
