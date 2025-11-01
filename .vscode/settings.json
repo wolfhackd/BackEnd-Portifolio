@@ -18,5 +18,6 @@
     "typescriptreact",
     "vue",
     "yaml"
-  ]
+  ],
+  "cSpell.words": ["postgresql", "uuid"]
 }
