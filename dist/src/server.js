@@ -7,46 +7,41 @@ import 'dotenv/config';
 import cookie from '@fastify/cookie';
 import { technologiesRoutes } from './controllers/technology.controller.js';
 import { projectRoutes } from './controllers/project.controller.js';
-
 // Create a Fastify instance
 const app = Fastify({
-  logger: true,
+    logger: true,
 });
-
 //server Config
 app.register(fastifyCors);
 app.register(cookie, {
-  secret: process.env.JWT_SECRET as string,
-  parseOptions: {},
+    secret: process.env.JWT_SECRET,
+    parseOptions: {},
 });
-
 //Server Docs
 app.register(swagger, {
-  swagger: {
-    info: {
-      title: 'Portifolio Routes API',
-      description: 'API Documentation for Portifolio Routes',
-      version: '1.0.0',
+    swagger: {
+        info: {
+            title: 'Portifolio Routes API',
+            description: 'API Documentation for Portifolio Routes',
+            version: '1.0.0',
+        },
     },
-  },
 });
-
 app.register(swaggerUi, {
-  routePrefix: '/docs',
+    routePrefix: '/docs',
 });
-
 //Routes
 app.register(authRoute);
 app.register(technologiesRoutes);
 app.register(projectRoutes);
-
 const port = Number(process.env.PORT || 3000);
-
 //Server Listener
 try {
-  await app.listen({ port: port, host: '0.0.0.0' });
-  console.log(`🚀 Server is running on http://localhost:${port}`);
-} catch (err) {
-  app.log.error(err);
-  process.exit(1);
+    await app.listen({ port: port, host: '0.0.0.0' });
+    console.log(`🚀 Server is running on http://localhost:${port}`);
 }
+catch (err) {
+    app.log.error(err);
+    process.exit(1);
+}
+//# sourceMappingURL=server.js.map
