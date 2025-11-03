@@ -1,8 +1,17 @@
 import type { FastifyInstance } from 'fastify';
-import { createProject, type Project } from './project/create.js';
+import { createProject } from './project/create.js';
 import { authMiddleware } from '../middleware/authMiddleware.js';
+import { listProjects } from './project/list.js';
+
+export type Project = {
+  title: string;
+  description: string;
+  link: string;
+  fastDescription: string;
+  overview: string;
+};
 
 export const projectRoutes = (app: FastifyInstance) => {
   app.post<{ Body: Project }>('/projects', { preHandler: authMiddleware }, createProject);
-  // app.post<{ Body: Project }>('/projects', createProject);
+  app.get('/projects', listProjects);
 };

@@ -1,13 +1,6 @@
 import type { FastifyReply, FastifyRequest } from 'fastify';
 import prisma from '../../lib/prisma.js';
-
-export type Project = {
-  title: string;
-  description: string;
-  link: string;
-  fastDescription: string;
-  overview: string;
-};
+import type { Project } from '../project.controller.js';
 
 export const createProject = async (
   req: FastifyRequest<{ Body: Project }>,

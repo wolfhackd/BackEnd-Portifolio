@@ -43,7 +43,7 @@ export async function authRoute(app: FastifyInstance) {
 
     const secretKey = env.JWT_SECRET as string;
 
-    const response = jwt.sign({ user }, secretKey, { expiresIn: '1d' });
+    const response = jwt.sign({ user }, secretKey, { expiresIn: '1h' });
 
     reply
       .setCookie('token', response, {
