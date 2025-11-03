@@ -7,6 +7,7 @@ import 'dotenv/config';
 import cookie from '@fastify/cookie';
 import { technologiesRoutes } from './controllers/technology.controller.js';
 import { projectRoutes } from './controllers/project.controller.js';
+import { me } from './routes/me.js';
 
 // Create a Fastify instance
 const app = Fastify({
@@ -14,7 +15,7 @@ const app = Fastify({
 });
 
 //server Config
-app.register(fastifyCors);
+app.register(fastifyCors, { origin: 'http://localhost:5173', credentials: true });
 app.register(cookie, {
   secret: process.env.JWT_SECRET as string,
   parseOptions: {},
@@ -39,6 +40,7 @@ app.register(swaggerUi, {
 app.register(authRoute);
 app.register(technologiesRoutes);
 app.register(projectRoutes);
+app.register(me);
 
 const port = Number(process.env.PORT || 3000);
 
