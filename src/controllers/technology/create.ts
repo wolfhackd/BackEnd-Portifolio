@@ -5,6 +5,7 @@ export type Technology = {
   name: string;
   color: string;
   icon: string;
+  category: string;
 };
 
 export const createTechnology = async (
@@ -12,8 +13,10 @@ export const createTechnology = async (
   reply: FastifyReply,
 ) => {
   try {
-    const { name, color, icon } = req.body;
-    const technology = await prisma.technology.create({ data: { name, color, icon } });
+    const { name, color, icon, category } = req.body;
+    const technology = await prisma.technology.create({
+      data: { name, color, icon, category: { connect: { id: category } } },
+    });
 
     return reply.status(201).send(technology);
   } catch {
