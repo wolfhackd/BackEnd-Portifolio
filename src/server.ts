@@ -8,6 +8,7 @@ import cookie from '@fastify/cookie';
 import { technologiesRoutes } from './controllers/technology.controller.js';
 import { projectRoutes } from './controllers/project.controller.js';
 import { me } from './routes/me.js';
+import { categoryRoutes } from './controllers/category.controller.js';
 
 // Create a Fastify instance
 const app = Fastify({
@@ -41,6 +42,7 @@ app.register(authRoute);
 app.register(technologiesRoutes);
 app.register(projectRoutes);
 app.register(me);
+app.register(categoryRoutes);
 
 const port = Number(process.env.PORT || 3000);
 

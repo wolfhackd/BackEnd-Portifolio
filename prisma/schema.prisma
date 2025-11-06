@@ -15,12 +15,21 @@ datasource db {
 }
 
 model Technology {
-  id       String              @id @default(uuid())
-  name     String
-  color    String
-  icon     String?
+  id         String    @id @default(uuid())
+  name       String
+  color      String
+  icon       String?
+  category   Category? @relation(fields: [categotyId], references: [id])
+  categotyId String?
+
   // # Relacionamento inverso com Project
   projects ProjectTechnology[]
+}
+
+model Category {
+  id           String       @id @default(uuid())
+  name         String
+  technologies Technology[]
 }
 
 model Challenge {
