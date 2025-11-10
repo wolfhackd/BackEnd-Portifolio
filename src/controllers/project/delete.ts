@@ -1,15 +1,15 @@
 import type { FastifyReply, FastifyRequest } from 'fastify';
 import prisma from '../../lib/prisma.js';
 
-export const deleteTechnology = async (req: FastifyRequest, reply: FastifyReply) => {
+export const deleteProject = async (req: FastifyRequest, reply: FastifyReply) => {
   try {
     const { id } = req.body as { id: string };
 
-    const technology = await prisma.technology.delete({
+    const project = await prisma.project.delete({
       where: { id },
     });
 
-    reply.status(200).send({ message: 'Tecnologia deletada com sucesso', technology });
+    reply.status(200).send({ message: 'Tecnologia projeto com sucesso', project });
   } catch (error) {
     console.error(error);
     return reply.status(500).send({ error: 'Erro interno do servidor' });

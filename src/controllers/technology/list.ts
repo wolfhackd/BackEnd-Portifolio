@@ -3,7 +3,7 @@ import prisma from '../../lib/prisma.js';
 
 export const listTechnology = async (req: FastifyRequest, reply: FastifyReply) => {
   try {
-    const technologyList = await prisma.technology.findMany();
+    const technologyList = await prisma.technology.findMany({ include: { category: true } });
 
     return reply.status(201).send(technologyList);
   } catch {

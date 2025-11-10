@@ -15,7 +15,12 @@ export const createTechnology = async (
   try {
     const { name, color, icon, category } = req.body;
     const technology = await prisma.technology.create({
-      data: { name, color, icon, category: { connect: { id: category } } },
+      data: {
+        name,
+        color,
+        icon,
+        category: { connect: { id: category } },
+      },
     });
 
     return reply.status(201).send(technology);
