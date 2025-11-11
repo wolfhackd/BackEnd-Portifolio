@@ -9,7 +9,7 @@ export const deleteProject = async (req: FastifyRequest, reply: FastifyReply) =>
       where: { id },
     });
 
-    reply.status(200).send({ message: 'Tecnologia projeto com sucesso', project });
+    reply.status(200).send({ message: 'Projeto deletado com sucesso', project });
   } catch (error) {
     console.error(error);
     reply.status(500).send({ error: 'Erro interno do servidor' });

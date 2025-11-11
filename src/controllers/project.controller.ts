@@ -15,5 +15,6 @@ export type Project = {
 export const projectRoutes = (app: FastifyInstance) => {
   app.post<{ Body: Project }>('/projects', { preHandler: authMiddleware }, createProject);
   app.post('/projects-delete', { preHandler: authMiddleware }, deleteProject);
+  // app.post('/projects-delete', deleteProject);
   app.get('/projects', listProjects);
 };
