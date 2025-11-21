@@ -4,6 +4,7 @@ import { authMiddleware } from '../middleware/authMiddleware.js';
 import { listProjects } from './project/list.js';
 import { deleteProject } from './project/delete.js';
 import { editProject } from './project/edit.js';
+import { getProject } from './project/get.js';
 
 export type Project = {
   title: string;
@@ -33,11 +34,11 @@ export type Params = {
 export const projectRoutes = (app: FastifyInstance) => {
   app.post<{ Body: Project }>('/projects', { preHandler: authMiddleware }, createProject);
   app.post('/projects-delete', { preHandler: authMiddleware }, deleteProject);
-  // app.post('/projects-delete', deleteProject);
   app.get('/projects', listProjects);
   app.post<{ Body: editedProject; Params: Params }>(
-    '/project-edit/:id',
+    '/projects-edit/:id',
     { preHandler: authMiddleware },
     editProject,
   );
+  app.get<{ Params: Params }>('/projects/:id', getProject);
 };
