@@ -1,5 +1,5 @@
 import type { FastifyReply, FastifyRequest } from 'fastify';
-import type { editedProject, Params, Project } from '../project.controller.js';
+import type { Challenge, editedProject, Params, Project } from '../project.controller.js';
 import prisma from '../../lib/prisma.js';
 
 export const editProject = async (req: FastifyRequest, reply: FastifyReply) => {
@@ -13,7 +13,7 @@ export const editProject = async (req: FastifyRequest, reply: FastifyReply) => {
       overview,
       images,
       technologies,
-      // challenges,
+      challenges,
     } = req.body as editedProject;
 
     await prisma.project.update({
@@ -27,6 +27,12 @@ export const editProject = async (req: FastifyRequest, reply: FastifyReply) => {
         images,
         technologies: {
           set: technologies.map((techId) => ({ id: techId })),
+        },
+        challenges: {
+          create: challenges.map((challenge: Challenge) => ({
+            title: challenge.title,
+            text: challenge.text,
+          })),
         },
       },
       include: {

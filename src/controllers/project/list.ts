@@ -7,6 +7,7 @@ export const listProjects = async (req: FastifyRequest, reply: FastifyReply) => 
     const projects = await prisma.project.findMany({
       include: {
         technologies: true,
+        challenges: true,
       },
     });
 

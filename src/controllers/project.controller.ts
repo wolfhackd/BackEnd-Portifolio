@@ -21,10 +21,17 @@ export type editedProject = {
   link: string;
   images: string[];
   technologies: string[];
-  // challenges: string[];
+  challenges: Challenge[];
 
   fastDescription: string;
   overview: string;
+};
+
+export type Challenge = {
+  id?: string;
+  title: string;
+  text: string;
+  projectId: string;
 };
 
 export type Params = {
