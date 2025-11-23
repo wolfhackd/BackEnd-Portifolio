@@ -12,9 +12,7 @@ import { categoryRoutes } from './controllers/category.controller.js';
 import { logoutRoute } from './routes/logout.js';
 
 // Create a Fastify instance
-const app = Fastify({
-  logger: true,
-});
+const app = Fastify();
 
 //server Config
 app.register(fastifyCors, { origin: `${process.env.FRONTEND_URL}`, credentials: true });
