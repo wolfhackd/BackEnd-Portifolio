@@ -17,7 +17,7 @@ const app = Fastify({
 });
 
 //server Config
-app.register(fastifyCors, { origin: 'http://localhost:5173', credentials: true });
+app.register(fastifyCors, { origin: `${process.env.FRONTEND_URL}`, credentials: true });
 app.register(cookie, {
   secret: process.env.JWT_SECRET as string,
   parseOptions: {},
