@@ -18,7 +18,11 @@ const app = Fastify();
 app.register(fastifyCors, { origin: `${process.env.FRONTEND_URL}`, credentials: true });
 app.register(cookie, {
   secret: process.env.JWT_SECRET as string,
-  parseOptions: {},
+  parseOptions: {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'none',
+  },
 });
 
 //Server Docs
