@@ -43,7 +43,6 @@ model Project {
   fastDescription String
   overview        String
 
-  // # Relacionamentos
   technologies Technology[] @relation("ProjectTechs")
   challenges   Challenge[]
 }

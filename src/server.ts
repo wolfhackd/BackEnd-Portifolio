@@ -1,60 +1,19 @@
-import Fastify from 'fastify';
-import swagger from '@fastify/swagger';
-import swaggerUi from '@fastify/swagger-ui';
-import fastifyCors from '@fastify/cors';
-import { authRoute } from './routes/loginCallback.js';
-import 'dotenv/config';
-import cookie from '@fastify/cookie';
-import { technologiesRoutes } from './controllers/technology.controller.js';
-import { projectRoutes } from './controllers/project.controller.js';
-import { me } from './routes/me.js';
-import { categoryRoutes } from './controllers/category.controller.js';
-import { logoutRoute } from './routes/logout.js';
+import app from "./app.js";
+import { env } from "./config/env.js";
+import { database } from "./database/database.js";
 
-// Create a Fastify instance
-const app = Fastify();
+async function startServer() {
+  try{
+    await database.connect();
 
-//server Config
-app.register(fastifyCors, { origin: `${process.env.FRONTEND_URL}`, credentials: true });
-app.register(cookie, {
-  secret: process.env.JWT_SECRET as string,
-  parseOptions: {
-    httpOnly: true,
-    secure: true,
-    sameSite: 'none',
-  },
-});
+    app.listen({ port: env.PORT, host: '0.0.0.0' }, () =>{
+      console.log(`🚀 Server is running on http://localhost:${env.PORT}`);
+    }) 
 
-//Server Docs
-app.register(swagger, {
-  swagger: {
-    info: {
-      title: 'Portifolio Routes API',
-      description: 'API Documentation for Portifolio Routes',
-      version: '1.0.0',
-    },
-  },
-});
-
-app.register(swaggerUi, {
-  routePrefix: '/docs',
-});
-
-//Routes
-app.register(authRoute);
-app.register(me);
-app.register(logoutRoute);
-app.register(technologiesRoutes);
-app.register(projectRoutes);
-app.register(categoryRoutes);
-
-const port = Number(process.env.PORT || 3000);
-
-//Server Listener
-try {
-  await app.listen({ port: port, host: '0.0.0.0' });
-  console.log(`🚀 Server is running on http://localhost:${port}`);
-} catch (err) {
-  app.log.error(err);
-  process.exit(1);
+  }catch(e){
+    console.log("Error starting server", { e });
+    process.exit(0);
+  }
 }
+
+startServer();
