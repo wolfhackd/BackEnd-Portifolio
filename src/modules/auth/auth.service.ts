@@ -22,15 +22,12 @@ export class AuthService {
 
       const accessTokenUrl = await this.githubService.getAccessTokenUrl(code);
       if(accessTokenUrl){
-        console.log('Passei pelo --> Access Token URL:', accessTokenUrl);
       }
       const userData = await this.githubService.getUserData(accessTokenUrl);
       if(userData){
-        console.log('Passei pelo --> GitHub User Data:', userData);
       }
       const isUserValid = await this.githubService.verifyUser(userData);
       if(isUserValid){
-        console.log('Passei pelo --> User is valid');
       }
       
       if(!isUserValid){
