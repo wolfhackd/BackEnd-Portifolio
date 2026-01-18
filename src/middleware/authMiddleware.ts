@@ -1,15 +1,20 @@
-import jwt from 'jsonwebtoken';
-import type { FastifyReply, FastifyRequest } from 'fastify';
+import type { FastifyReply, FastifyRequest } from "fastify";
+import type { authMiddlewareService } from "./auth.service.js";
 
-export async function authMiddleware(req: FastifyRequest, reply: FastifyReply) {
-  const token = req.cookies.token;
-  if (!token) return reply.status(401).send({ error: 'Token ausente' });
+export const authMiddleware = (authService: authMiddlewareService) => {
+  return async (req: FastifyRequest, reply: FastifyReply) => {
+    const token = req.cookies.token;
 
-  try {
-    const secretKey = process.env.JWT_SECRET as string;
-    const decoded = jwt.verify(token, secretKey);
-    (req as any).user = decoded;
-  } catch {
-    return reply.status(401).send({ error: 'Token inválido' });
-  }
-}
+    if (!token) {
+      return reply.status(401).send({ error: "Token not found" });
+    }
+
+    const decoded = await authService.verifyUser(token);
+
+    if (!decoded) {
+      return reply.status(401).send({ error: "Token invalid or expired" });
+    }
+
+    req.user = decoded;
+  };
+};

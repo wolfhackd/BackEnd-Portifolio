@@ -1,7 +1,7 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
-import { GitHubAuthService } from "./providers/github.service.js";
 import { JwtService } from "../../shared/jwtService.js";
 import { CookieService } from "../../shared/cookie-service.js";
+import type { GitHubAuthService } from "../providers/github.service.js";
 
 export class AuthService {
   public constructor(

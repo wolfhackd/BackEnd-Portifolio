@@ -1,7 +1,7 @@
 import type { FastifyInstance } from "fastify/types/instance.js";
 import { AuthService } from "./auth.service.js";
-import { GitHubAuthService } from "./providers/github.service.js";
 import { JwtService } from "../../shared/jwtService.js";
+import { GitHubAuthService } from "../providers/github.service.js";
 
 const githubService = new GitHubAuthService();
 const jwtService = new JwtService();
