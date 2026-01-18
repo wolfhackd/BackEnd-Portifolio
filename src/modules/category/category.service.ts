@@ -15,4 +15,10 @@ export class CategoryService {
 
     return category;
   };
+
+  public listCategories = async () => {
+    const categories = await this.categoryRepository.listCategories();
+    if (!categories) return "Categories not found";
+    return categories;
+  };
 }

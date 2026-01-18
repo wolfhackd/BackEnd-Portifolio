@@ -17,10 +17,23 @@ export class CategoryController {
 
       return reply.status(201).send(res);
     } catch (e: any) {
-      console.error("DETALHE DO ERRO:", e); // ADICIONE ISSO
+      console.error("DETAILS TO ERROR:", e);
       return reply.status(500).send({
         error: "Internal Error",
-        message: e.message, // TEMPORÁRIO: para você ver o erro no Postman/Insomnia
+        message: e.message,
+      });
+    }
+  };
+
+  public listCategories = async (req: FastifyRequest, reply: FastifyReply) => {
+    try {
+      const res = await this.categoryService.listCategories();
+
+      return reply.status(200).send(res);
+    } catch (e: any) {
+      return reply.status(500).send({
+        error: "Internal Error",
+        message: e.message,
       });
     }
   };

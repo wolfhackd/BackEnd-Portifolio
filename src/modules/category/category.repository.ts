@@ -14,4 +14,9 @@ export class CategoryRepository {
     });
     return category;
   }
+
+  async listCategories() {
+    const categories = await this.database.category.findMany({});
+    return categories;
+  }
 }

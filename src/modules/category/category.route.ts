@@ -9,4 +9,6 @@ const categoryController = new CategoryController(service);
 
 export const categoryRoute = async (app: FastifyInstance) => {
   app.post("/category", categoryController.createCategory);
+  app.get("/category", categoryController.listCategories);
+  // app.post('/category-delete', { preHandler: authMiddleware }, deleteCategory);
 };
