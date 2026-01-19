@@ -21,4 +21,12 @@ export class CategoryService {
     if (!categories) return "Categories not found";
     return categories;
   };
+
+  public deleteCategory = async (id: string) => {
+    const categoryExists = await this.categoryRepository.getCategory(id);
+    if (!categoryExists) return "Category not found";
+
+    const category = await this.categoryRepository.deleteCategory(id);
+    return "Category deleted successfully";
+  };
 }

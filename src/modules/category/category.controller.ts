@@ -37,4 +37,22 @@ export class CategoryController {
       });
     }
   };
+
+  public deleteCategory = async (req: FastifyRequest, reply: FastifyReply) => {
+    try {
+      const { id } = req.body as { id: string };
+      if (!id) {
+        return reply.status(400).send({ error: "Invalid data" });
+      }
+
+      const res = await this.categoryService.deleteCategory(id);
+
+      return reply.status(200).send(res);
+    } catch (e: any) {
+      return reply.status(500).send({
+        error: "Internal Error",
+        message: e.message,
+      });
+    }
+  };
 }

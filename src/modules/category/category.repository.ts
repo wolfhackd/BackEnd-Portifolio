@@ -19,4 +19,22 @@ export class CategoryRepository {
     const categories = await this.database.category.findMany({});
     return categories;
   }
+
+  async getCategory(id: string) {
+    const category = await this.database.category.findFirst({
+      where: { id: id },
+    });
+    return category;
+  }
+
+  async deleteCategory(id: string) {
+    const category = await this.database.category.delete({
+      where: {
+        id,
+      },
+    });
+
+    if (!category) return false;
+    return true;
+  }
 }
