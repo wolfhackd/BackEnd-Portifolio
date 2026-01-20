@@ -8,10 +8,16 @@ export class TechnologyService {
   public createTechnology = async (data: ITechnology) => {
     const newTechnology = new Technology(data);
 
-    return this.technologyRepository.createTechnology(newTechnology);
+    return await this.technologyRepository.createTechnology(newTechnology);
   };
 
   public listTechnologies = async () => {
-    return this.technologyRepository.listTechnologies();
+    return await this.technologyRepository.listTechnologies();
+  };
+
+  public deleteTechnology = async (id: string) => {
+    const res = await this.technologyRepository.deleteTechnology(id);
+    if (!res) return "Technology not found";
+    return "Technology deleted successfully";
   };
 }

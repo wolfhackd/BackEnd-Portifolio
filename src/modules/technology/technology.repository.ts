@@ -12,4 +12,8 @@ export class TechnologyRepository {
   public listTechnologies() {
     return this.database.technology.findMany({});
   }
+
+  public deleteTechnology(id: string) {
+    return this.database.technology.delete({ where: { id } });
+  }
 }

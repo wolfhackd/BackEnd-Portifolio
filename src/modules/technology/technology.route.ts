@@ -11,5 +11,5 @@ const technologyController = new TechnologyController(service);
 export const technologyRoute = async (app: FastifyInstance) => {
   app.post("/technology", technologyController.createTechnology);
   app.get("/technology", technologyController.listTechnologies);
-  //   app.post("/technology-delete", technologyController.deletetechnology);
+  app.post("/technology-delete", technologyController.deleteTechnology);
 };
