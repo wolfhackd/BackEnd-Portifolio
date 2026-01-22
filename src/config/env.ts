@@ -20,6 +20,8 @@ export const envSchema = z.object({
   JWT_SECRET: z.string().min(1, "JWT secret is required"),
   JWT_EXPIRES_IN_MINUTES: z.coerce.number().default(60),
   JWT_ALGORITHM: z.enum(["HS256", "HS384", "HS512"]).default("HS256"),
+
+  FRONTEND_URL: z.string().default("*"),
 });
 
 const _env = envSchema.safeParse(process.env);
