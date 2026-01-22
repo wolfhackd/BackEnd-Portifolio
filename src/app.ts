@@ -6,13 +6,14 @@ import { authRoute } from "./modules/auth/auth.route.js";
 import { categoryRoute } from "./modules/category/category.route.js";
 import { technologyRoute } from "./modules/technology/technology.route.js";
 import { projectRoute } from "./modules/project/project.route.js";
+import { me } from "./routes/me.js";
 
 // Create a Fastify instance
 const app = Fastify({ logger: true });
 
 //server Config
 app.register(fastifyCors, {
-  origin: `${process.env.FRONTEND_URL}`,
+  origin: `${env.FRONTEND_URL}`,
   credentials: true,
 });
 app.register(fastifyCookie, {
@@ -24,7 +25,7 @@ app.register(authRoute);
 app.register(categoryRoute);
 app.register(technologyRoute);
 app.register(projectRoute);
-// app.register(me);
+app.register(me);
 // app.register(logoutRoute);
 // app.register(projectRoutes);
 
