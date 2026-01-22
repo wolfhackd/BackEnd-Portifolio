@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev2": "tsx --env-file=.env src/server.ts",
-    "dev": "tsx src/server.ts",
+    "dev": "tsx --watch src/server.ts",
     "build": "tsc",
     "start": "node dist/src/server.js",
     "prisma:generate": "prisma generate",

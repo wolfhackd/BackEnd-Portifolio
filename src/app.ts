@@ -5,6 +5,7 @@ import { env } from "./config/env.js";
 import { authRoute } from "./modules/auth/auth.route.js";
 import { categoryRoute } from "./modules/category/category.route.js";
 import { technologyRoute } from "./modules/technology/technology.route.js";
+import { projectRoute } from "./modules/project/project.route.js";
 
 // Create a Fastify instance
 const app = Fastify({ logger: true });
@@ -22,6 +23,7 @@ app.register(fastifyCookie, {
 app.register(authRoute);
 app.register(categoryRoute);
 app.register(technologyRoute);
+app.register(projectRoute);
 // app.register(me);
 // app.register(logoutRoute);
 // app.register(projectRoutes);
