@@ -10,4 +10,5 @@ const authService = new AuthService(githubService, jwtService);
 export const authRoute = async (app: FastifyInstance) => {
   app.post("/auth/github", authService.login);
   app.post("/logout", authService.logout);
+  app.get("/me", authService.me);
 };

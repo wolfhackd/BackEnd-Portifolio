@@ -25,8 +25,5 @@ app.register(authRoute);
 app.register(categoryRoute);
 app.register(technologyRoute);
 app.register(projectRoute);
-app.register(me);
-// app.register(logoutRoute);
-// app.register(projectRoutes);
 
 export default app;

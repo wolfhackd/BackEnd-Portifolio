@@ -53,4 +53,34 @@ export class AuthService {
       return reply.status(500).send({ error: "Internal Server Error" });
     }
   };
+
+  public me = async (req: FastifyRequest, reply: FastifyReply) => {
+    try {
+      const signedToken = req.cookies.token;
+
+      if (!signedToken) {
+        return reply.status(401).send({ error: "Token not found" });
+      }
+
+      const { valid, value } = req.unsignCookie(signedToken);
+
+      if (!valid || !value) {
+        return reply.status(401).send({ error: "Cookie signature invalid" });
+      }
+
+      const decoded = this.jwtService.verify(value);
+
+      if (!decoded) {
+        return reply.status(401).send({ error: "Token invalid or expired" });
+      }
+
+      return reply.status(200).send({
+        message: "User authenticated",
+        user: decoded,
+      });
+    } catch (e) {
+      console.error("Error during authentication check:", e);
+      return reply.status(500).send({ error: "Internal Server Error" });
+    }
+  };
 }

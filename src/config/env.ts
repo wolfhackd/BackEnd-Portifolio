@@ -21,7 +21,7 @@ export const envSchema = z.object({
   JWT_EXPIRES_IN_MINUTES: z.coerce.number().default(60),
   JWT_ALGORITHM: z.enum(["HS256", "HS384", "HS512"]).default("HS256"),
 
-  FRONTEND_URL: z.string().default("*"),
+  FRONTEND_URL: z.string().default("http://localhost:5173"),
 });
 
 const _env = envSchema.safeParse(process.env);
