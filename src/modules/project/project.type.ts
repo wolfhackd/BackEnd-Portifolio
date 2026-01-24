@@ -1,6 +1,6 @@
 import z from "zod";
 
-const Project = z.object({
+export const ProjectInput = z.object({
   id: z.string(),
   title: z.string(),
   description: z.string(),
@@ -13,7 +13,7 @@ const Project = z.object({
   challenges: z.array(z.string()),
 });
 
-export type IProject = z.infer<typeof Project>;
+export type IProject = z.infer<typeof ProjectInput>;
 
 export const createProjectInput = z.object({
   title: z.string(),

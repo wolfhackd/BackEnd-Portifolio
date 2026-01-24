@@ -25,7 +25,7 @@ export class ProjectService {
     return await this.projectRepository.getProject(id);
   };
 
-  public updateProject = async (id: string, data: any) => {
+  public updateProject = async (id: string, data: IProject) => {
     return await this.projectRepository.updateProject(id, data);
   };
 }

@@ -40,7 +40,7 @@ export class CategoryController {
 
   public deleteCategory = async (req: FastifyRequest, reply: FastifyReply) => {
     try {
-      const { id } = req.body as { id: string };
+      const { id } = req.params as { id: string };
       if (!id) {
         return reply.status(400).send({ error: "Invalid data" });
       }

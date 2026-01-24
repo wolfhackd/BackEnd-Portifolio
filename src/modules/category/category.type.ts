@@ -9,7 +9,7 @@ export type CreateCategoryBody = z.infer<typeof createCategoryInput>;
 export const categorySchema = z.object({
   id: z.string(),
   name: z.string(),
-  technologies: z.array(z.string()),
+  technologies: z.array(z.string()).optional(),
 });
 
 export type ICategorySchema = z.infer<typeof categorySchema>;
