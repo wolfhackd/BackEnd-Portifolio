@@ -10,4 +10,7 @@ const projectController = new ProjectController(projectService);
 export const projectRoute = async (app: FastifyInstance) => {
   app.post("/project", projectController.createProject);
   app.get("/project", projectController.listProjects);
+  app.delete("/project-delete/:id", projectController.deleteProject);
+  app.get("/project/:id", projectController.getProject);
+  app.put("/project/:id", projectController.updateProject);
 };

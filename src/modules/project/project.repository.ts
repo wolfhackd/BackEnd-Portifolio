@@ -44,4 +44,9 @@ export class ProjectRepository {
   async deleteProject(id: string) {
     return await this.database.project.delete({ where: { id } });
   }
+
+  //fix type
+  async updateProject(id: string, data: any) {
+    return await this.database.project.update({ where: { id }, data });
+  }
 }

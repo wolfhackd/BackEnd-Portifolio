@@ -16,4 +16,16 @@ export class ProjectService {
   public listProjects = async () => {
     return await this.projectRepository.listProjects();
   };
+
+  public deleteProject = async (id: string) => {
+    return await this.projectRepository.deleteProject(id);
+  };
+
+  public getProject = async (id: string) => {
+    return await this.projectRepository.getProject(id);
+  };
+
+  public updateProject = async (id: string, data: any) => {
+    return await this.projectRepository.updateProject(id, data);
+  };
 }
