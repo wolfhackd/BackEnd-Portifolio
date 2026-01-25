@@ -25,6 +25,7 @@ app.setSerializerCompiler(serializerCompiler);
 //server Config
 app.register(fastifyCors, {
   origin: `${env.FRONTEND_URL}`,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true,
 });
 app.register(fastifyCookie, {
