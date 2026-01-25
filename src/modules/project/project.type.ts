@@ -6,11 +6,24 @@ export const ProjectInput = z.object({
   description: z.string(),
   images: z.array(z.string()),
   link: z.string(),
-  created: z.string(),
+  created: z.coerce.date(),
   fastDescription: z.string(),
   overview: z.string(),
-  technologies: z.array(z.string()),
-  challenges: z.array(z.string()),
+  technologies: z
+    .array(
+      z.object({
+        id: z.string(),
+      }),
+    )
+    .optional(),
+
+  challenges: z
+    .array(
+      z.object({
+        id: z.string(),
+      }),
+    )
+    .optional(),
 });
 
 export type IProject = z.infer<typeof ProjectInput>;

@@ -42,7 +42,7 @@ export class TechnologyController {
     reply: FastifyReply,
   ) => {
     try {
-      const { id } = req.body as { id: string };
+      const { id } = req.params as { id: string };
       const res = await this.technologyService.deleteTechnology(id);
       if (!res)
         return reply.status(404).send({ error: "Technology not found" });

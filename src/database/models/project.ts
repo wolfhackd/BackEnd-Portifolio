@@ -7,8 +7,8 @@ export class Project {
   created: string;
   fastDescription: string;
   overview: string;
-  technologies: string[];
-  challenges: string[];
+  technologies?: string[];
+  challenges?: string[];
 
   constructor(props: any) {
     this.id = props.id ?? crypto.randomUUID();
