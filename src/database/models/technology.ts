@@ -3,19 +3,19 @@ export class Technology {
   public name: string;
   public color: string;
   public icon: string | null;
-  public categoryId: string | null;
+  public categoryId: string;
 
   constructor(props: {
     id?: string;
     name: string;
     color: string;
     icon?: string | null;
-    categoryId?: string | null;
+    categoryId: string;
   }) {
     this.id = props.id ?? crypto.randomUUID();
     this.name = props.name;
     this.color = props.color;
     this.icon = props.icon ?? null;
-    this.categoryId = props.categoryId ?? null;
+    this.categoryId = props.categoryId;
   }
 }

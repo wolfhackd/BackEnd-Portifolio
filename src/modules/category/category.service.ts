@@ -16,17 +16,17 @@ export class CategoryService {
     return category;
   };
 
+  public getCategory = async (id: string) => {
+    const category = await this.categoryRepository.getCategory(id);
+    return category;
+  };
+
   public listCategories = async () => {
     const categories = await this.categoryRepository.listCategories();
-    if (!categories) return "Categories not found";
     return categories;
   };
 
   public deleteCategory = async (id: string) => {
-    const categoryExists = await this.categoryRepository.getCategory(id);
-    if (!categoryExists) return "Category not found";
-
-    const category = await this.categoryRepository.deleteCategory(id);
-    return "Category deleted successfully";
+    return await this.categoryRepository.deleteCategory(id);
   };
 }

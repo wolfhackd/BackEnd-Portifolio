@@ -15,6 +15,10 @@ export class CategoryController {
 
       const res = await this.categoryService.createCategory(data);
 
+      if (!res) {
+        return reply.status(400).send({ error: "Invalid data" });
+      }
+
       return reply.status(201).send(res);
     } catch (e: any) {
       console.error("DETAILS TO ERROR:", e);
@@ -28,6 +32,10 @@ export class CategoryController {
   public listCategories = async (req: FastifyRequest, reply: FastifyReply) => {
     try {
       const res = await this.categoryService.listCategories();
+
+      if (!res) {
+        return reply.status(404).send({ error: "Categories not found" });
+      }
 
       return reply.status(200).send(res);
     } catch (e: any) {
@@ -46,6 +54,10 @@ export class CategoryController {
       }
 
       const res = await this.categoryService.deleteCategory(id);
+
+      if (!res) {
+        return reply.status(404).send({ error: "Category not found" });
+      }
 
       return reply.status(200).send(res);
     } catch (e: any) {

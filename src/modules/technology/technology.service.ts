@@ -16,8 +16,6 @@ export class TechnologyService {
   };
 
   public deleteTechnology = async (id: string) => {
-    const res = await this.technologyRepository.deleteTechnology(id);
-    if (!res) return "Technology not found";
-    return "Technology deleted successfully";
+    return await this.technologyRepository.deleteTechnology(id);
   };
 }
