@@ -29,3 +29,13 @@ export const deleteCategorySchema = {
     200: categorySchema,
   },
 };
+
+export const getCategorySchema = {
+  description: "Get a category by id",
+  tags: ["Category"],
+  summary: "Get a category by id",
+  params: z.object({ id: z.string() }),
+  response: {
+    200: categorySchema,
+  },
+};

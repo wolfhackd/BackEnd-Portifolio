@@ -5,8 +5,7 @@ import { TechnologyRepository } from "./technology.repository.js";
 import { TechnologyService } from "./technology.service.js";
 import {
   createTechnologySchema,
-  deleteTechnologySchema,
-  listTechnologiesSchema,
+  deleteTechnologySchema, listTechnologiesSchema
 } from "./technology.schema.js";
 import { CategoryRepository } from "../category/category.repository.js";
 import { CategoryService } from "../category/category.service.js";

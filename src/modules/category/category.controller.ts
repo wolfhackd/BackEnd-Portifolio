@@ -67,4 +67,20 @@ export class CategoryController {
       });
     }
   };
+
+  public getCategory = async (req: FastifyRequest, reply: FastifyReply) => {
+    try {
+      const { id } = req.params as { id: string };
+      const res = await this.categoryService.getCategory(id);
+      if (!res) {
+        return reply.status(404).send({ error: "Category not found" });
+      }
+      return reply.status(200).send(res);
+    } catch (e: any) {
+      return reply.status(500).send({
+        error: "Internal Error",
+        message: e.message,
+      });
+    }
+  };
 }

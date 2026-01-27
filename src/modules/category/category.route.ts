@@ -5,6 +5,7 @@ import { CategoryService } from "./category.service.js";
 import {
   createCategorySchema,
   deleteCategorySchema,
+  getCategorySchema,
   listCategoriesSchema,
 } from "./category.schema.js";
 
@@ -22,6 +23,11 @@ export const categoryRoute = async (app: FastifyInstance) => {
     "/category",
     { schema: listCategoriesSchema },
     categoryController.listCategories,
+  );
+  app.get(
+    "/category/:id",
+    { schema: getCategorySchema },
+    categoryController.getCategory,
   );
   app.delete(
     "/category-delete/:id",
