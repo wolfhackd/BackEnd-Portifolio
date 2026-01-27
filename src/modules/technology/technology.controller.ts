@@ -2,9 +2,13 @@ import type { FastifyReply, FastifyRequest } from "fastify";
 import type { TechnologyService } from "./technology.service.js";
 import { createTechnologyInput } from "./technology.type.js";
 import { Prisma } from "../../generated/prisma/client.js";
+import type { CategoryService } from "../category/category.service.js";
 
 export class TechnologyController {
-  constructor(private readonly technologyService: TechnologyService) {}
+  constructor(
+    private readonly technologyService: TechnologyService,
+    private readonly categoryService: CategoryService,
+  ) {}
 
   public createTechnology = async (
     req: FastifyRequest,
@@ -12,6 +16,18 @@ export class TechnologyController {
   ) => {
     try {
       const data = createTechnologyInput.parse(req.body);
+
+      //find category
+      const category = await this.categoryService.getCategory(data.categoryId);
+      if (!category) {
+        return reply.status(400).send({ error: "Category not found" });
+      }
+      console.log("Categoria encontrada:", category);
+
+      if (!data) {
+        return reply.status(400).send({ error: "Invalid data" });
+      }
+
       const res = await this.technologyService.createTechnology(data);
       return reply.status(201).send(res);
     } catch (e: any) {

@@ -8,10 +8,17 @@ import {
   deleteTechnologySchema,
   listTechnologiesSchema,
 } from "./technology.schema.js";
+import { CategoryRepository } from "../category/category.repository.js";
+import { CategoryService } from "../category/category.service.js";
 
-const repository = new TechnologyRepository();
-const service = new TechnologyService(repository);
-const technologyController = new TechnologyController(service);
+const technologyRepository = new TechnologyRepository();
+const technologyService = new TechnologyService(technologyRepository);
+const categoryRepository = new CategoryRepository();
+const categoryService = new CategoryService(categoryRepository);
+const technologyController = new TechnologyController(
+  technologyService,
+  categoryService,
+);
 
 export const technologyRoute = async (app: FastifyInstance) => {
   app.post(

@@ -5,8 +5,15 @@ import type { PrismaClient } from "../../generated/prisma/client.js";
 export class TechnologyRepository {
   constructor(private readonly database: PrismaClient = prisma) {}
 
-  public createTechnology(data: Technology) {
-    return this.database.technology.create({ data });
+  public createTechnology(tech: Technology) {
+    return this.database.technology.create({
+      data: {
+        name: tech.name,
+        color: tech.color,
+        icon: tech.icon,
+        category: { connect: { id: tech.categoryId } },
+      },
+    });
   }
 
   public listTechnologies() {
