@@ -29,6 +29,10 @@ export class ProjectController {
     try {
       const res = await this.projectService.listProjects();
 
+      if (!res) {
+        return reply.status(404).send({ error: "Projects not found" });
+      }
+
       return reply.status(200).send(res);
     } catch (e: any) {
       return reply.status(500).send({
