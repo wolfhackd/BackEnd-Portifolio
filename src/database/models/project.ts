@@ -1,5 +1,5 @@
 export class Project {
-  id: string;
+  id?: string;
   title: string;
   description: string;
   images: string[];
@@ -11,7 +11,7 @@ export class Project {
   challenges?: string[];
 
   constructor(props: any) {
-    this.id = props.id ?? crypto.randomUUID();
+    this.id = props.id;
     this.title = props.title;
     this.description = props.description;
     this.images = props.images ?? [];
@@ -21,5 +21,9 @@ export class Project {
     this.overview = props.overview;
     this.technologies = props.technologies ?? [];
     this.challenges = props.challenges ?? [];
+  }
+
+  isPersisted(): boolean {
+    return !!this.id;
   }
 }
