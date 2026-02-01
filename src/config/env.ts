@@ -9,6 +9,8 @@ dotenv.config({
 });
 
 export const envSchema = z.object({
+  NODE_ENV: process.env.NODE_ENV || "development",
+
   DATABASE_URL: z.string().url().min(1, "Database URL is required"),
   PORT: z.coerce.number().default(3000),
 

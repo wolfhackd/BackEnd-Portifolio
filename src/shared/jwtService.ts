@@ -9,7 +9,7 @@ export class JwtService {
   public sign({ userId }: { userId: string }): string | null {
     try {
       return jwt.sign({ userId }, this.secret, {
-        expiresIn: `${this.expiresIn}m`,
+        expiresIn: this.expiresIn,
         algorithm: this.algorithm as jwt.Algorithm,
       });
     } catch {
