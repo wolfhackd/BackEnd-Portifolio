@@ -6,7 +6,8 @@ export class CookieService {
     response.setCookie("token", token, {
       httpOnly: true,
       signed: true,
-      secure: env.NODE_ENV === "production",
+      // secure: env.NODE_ENV === "production",
+      secure: true,
       path: "/",
       sameSite: "lax",
       maxAge: 60 * 60 * 24,
