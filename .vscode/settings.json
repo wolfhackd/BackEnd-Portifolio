@@ -19,5 +19,5 @@
     "vue",
     "yaml"
   ],
-  "cSpell.words": ["postgresql", "uuid"]
+  "cSpell.words": ["datasource", "postgresql", "uuid"]
 }

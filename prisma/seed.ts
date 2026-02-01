@@ -1,9 +1,9 @@
-import prisma from '../src/lib/prisma.js';
+import { prisma } from "../src/database/database.js";
 //Lists
-import CategoryList from '../prisma/seed/Category.js';
-import TechnologyList from '../prisma/seed/Technology.js';
-import ProjectList from '../prisma/seed/Project.js';
-import ChallengeList from '../prisma/seed/Challenge.js';
+import CategoryList from "../prisma/seed/Category.js";
+import TechnologyList from "../prisma/seed/Technology.js";
+import ProjectList from "../prisma/seed/Project.js";
+import ChallengeList from "../prisma/seed/Challenge.js";
 
 //Category -> Technology -> Project -> Challenge
 
@@ -29,9 +29,9 @@ const Seed = async () => {
       });
     });
 
-    return console.log('seeded');
+    return console.log("seeded");
   } catch (error) {
-    return console.log('error to seed' + error);
+    return console.log("error to seed" + error);
   }
 };
 

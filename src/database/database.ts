@@ -1,6 +1,6 @@
-import { env } from '../config/env.js';
-import { PrismaPg } from '@prisma/adapter-pg';
-import { PrismaClient } from '../generated/prisma/client.js';
+import { PrismaPg } from "@prisma/adapter-pg";
+import { env } from "../config/env.js";
+import { PrismaClient } from "../generated/prisma/client.js";
 
 export class Database {
   private static instance: Database;
@@ -36,13 +36,13 @@ export class Database {
       return;
     }
 
-    try{
+    try {
       console.log("Connecting to the database...");
       await this.prisma.$connect();
       this.isConnected = true;
       console.log("Database connected successfully");
-    }catch(e){
-      console.log(e)
+    } catch (e) {
+      console.log(e);
     }
   }
 
