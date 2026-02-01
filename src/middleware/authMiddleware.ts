@@ -3,18 +3,18 @@ import type { authMiddlewareService } from "./auth.service.js";
 
 export const authMiddleware = (authService: authMiddlewareService) => {
   return async (req: FastifyRequest, reply: FastifyReply) => {
-    const token = req.cookies.token;
+    try {
+      const token = req.cookies.token;
 
-    if (!token) {
-      return reply.status(401).send({ error: "Token not found" });
+      if (!token) {
+        return reply.status(401).send({ error: "Token not found" });
+      }
+
+      const decoded = await authService.verifyUser(token);
+
+      req.user = decoded;
+    } catch {
+      return reply.status(401).send({ error: "Unauthorized" });
     }
-
-    const decoded = await authService.verifyUser(token);
-
-    if (!decoded) {
-      return reply.status(401).send({ error: "Token invalid or expired" });
-    }
-
-    req.user = decoded;
   };
 };

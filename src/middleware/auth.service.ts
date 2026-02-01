@@ -9,7 +9,6 @@ export class authMiddlewareService {
     if (!decoded) {
       throw new Error("Unauthorized: Invalid or expired token");
     }
-
     return decoded;
   }
 }

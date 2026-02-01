@@ -2,43 +2,39 @@ import type { FastifyInstance } from "fastify";
 import { ProjectController } from "./project.controller.js";
 import { ProjectService } from "./project.service.js";
 import { ProjectRepository } from "./project.repository.js";
-import {
-  createProjectSchema,
-  deleteProjectSchema,
-  getProjectSchema,
-  listProjectsSchema,
-  updateProjectSchema,
-} from "./project.schema.js";
-import { get } from "http";
+import { authMiddleware } from "../../middleware/authMiddleware.js";
+import { authMiddlewareService } from "../../middleware/auth.service.js";
+import { JwtService } from "../../shared/jwtService.js";
 
 const projectRepository = new ProjectRepository();
 const projectService = new ProjectService(projectRepository);
 const projectController = new ProjectController(projectService);
 
+// instância do JWT + serviço de auth
+const jwtService = new JwtService();
+const authService = new authMiddlewareService(jwtService);
+
 export const projectRoute = async (app: FastifyInstance) => {
+  // Rotas protegidas
   app.post(
     "/project",
-    // { schema: createProjectSchema },
+    { preHandler: authMiddleware(authService) },
     projectController.createProject,
   );
-  app.get(
-    "/project",
-    // { schema: listProjectsSchema },
-    projectController.listProjects,
-  );
-  app.delete(
-    "/project-delete/:id",
-    // { schema: deleteProjectSchema },
-    projectController.deleteProject,
-  );
-  app.get(
-    "/project/:id",
-    // { schema: getProjectSchema },
-    projectController.getProject,
-  );
+
   app.put(
     "/project/:id",
-    // { schema: updateProjectSchema },
+    { preHandler: authMiddleware(authService) },
     projectController.updateProject,
   );
+
+  app.delete(
+    "/project-delete/:id",
+    { preHandler: authMiddleware(authService) },
+    projectController.deleteProject,
+  );
+
+  // Rotas públicas
+  app.get("/project", projectController.listProjects);
+  app.get("/project/:id", projectController.getProject);
 };
