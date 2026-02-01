@@ -26,7 +26,7 @@ export const authRoute = async (app: FastifyInstance) => {
 
   app.get(
     "/me",
-    { preHandler: authMiddleware(authServiceMiddleware) },
+    // { preHandler: authMiddleware(authServiceMiddleware) },
     authService.me,
   );
 };
