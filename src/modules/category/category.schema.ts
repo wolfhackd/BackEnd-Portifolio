@@ -1,5 +1,6 @@
 import z from "zod";
 import { categorySchema, createCategoryInput } from "./category.type.js";
+import { id } from "zod/locales";
 
 export const createCategorySchema = {
   description: "Create a new category",
@@ -16,7 +17,21 @@ export const listCategoriesSchema = {
   tags: ["Category"],
   summary: "List all categories",
   response: {
-    200: z.array(categorySchema),
+    200: z.array(
+      z.object({
+        id: z.string(),
+        name: z.string(),
+        technologies: z.array(
+          z.object({
+            id: z.string(),
+            name: z.string(),
+            color: z.string(),
+            icon: z.string().nullish(),
+            categoryId: z.string(),
+          }),
+        ),
+      }),
+    ),
   },
 };
 
@@ -36,6 +51,20 @@ export const getCategorySchema = {
   summary: "Get a category by id",
   params: z.object({ id: z.string() }),
   response: {
-    200: categorySchema,
+    200: z.object({
+      id: z.string(),
+      name: z.string(),
+      technologies: z
+        .array(
+          z.object({
+            id: z.string(),
+            name: z.string(),
+            color: z.string(),
+            icon: z.string().nullish(),
+            categoryId: z.string(),
+          }),
+        )
+        .optional(),
+    }),
   },
 };

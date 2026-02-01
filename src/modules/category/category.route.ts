@@ -16,22 +16,22 @@ const categoryController = new CategoryController(service);
 export const categoryRoute = async (app: FastifyInstance) => {
   app.post(
     "/category",
-    { schema: createCategorySchema },
+    // { schema: createCategorySchema },
     categoryController.createCategory,
   );
   app.get(
     "/category",
-    { schema: listCategoriesSchema },
+    // { schema: listCategoriesSchema },
     categoryController.listCategories,
   );
   app.get(
     "/category/:id",
-    { schema: getCategorySchema },
+    // { schema: getCategorySchema },
     categoryController.getCategory,
   );
   app.delete(
     "/category-delete/:id",
-    { schema: deleteCategorySchema },
+    // { schema: deleteCategorySchema },
     categoryController.deleteCategory,
   );
 };

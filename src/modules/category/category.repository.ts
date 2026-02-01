@@ -16,13 +16,16 @@ export class CategoryRepository {
   }
 
   async listCategories() {
-    const categories = await this.database.category.findMany({});
+    const categories = await this.database.category.findMany({
+      include: { technologies: true },
+    });
     return categories;
   }
 
   async getCategory(id: string) {
     const category = await this.database.category.findFirst({
       where: { id: id },
+      include: { technologies: true },
     });
     return category;
   }

@@ -5,7 +5,8 @@ import { TechnologyRepository } from "./technology.repository.js";
 import { TechnologyService } from "./technology.service.js";
 import {
   createTechnologySchema,
-  deleteTechnologySchema, listTechnologiesSchema
+  deleteTechnologySchema,
+  listTechnologiesSchema,
 } from "./technology.schema.js";
 import { CategoryRepository } from "../category/category.repository.js";
 import { CategoryService } from "../category/category.service.js";
@@ -22,17 +23,17 @@ const technologyController = new TechnologyController(
 export const technologyRoute = async (app: FastifyInstance) => {
   app.post(
     "/technology",
-    { schema: createTechnologySchema },
+    // { schema: createTechnologySchema },
     technologyController.createTechnology,
   );
   app.get(
     "/technology",
-    { schema: listTechnologiesSchema },
+    // { schema: listTechnologiesSchema },
     technologyController.listTechnologies,
   );
   app.delete(
     "/technology-delete/:id",
-    { schema: deleteTechnologySchema },
+    // { schema: deleteTechnologySchema },
     technologyController.deleteTechnology,
   );
 };

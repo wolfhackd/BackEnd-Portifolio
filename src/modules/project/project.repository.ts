@@ -1,7 +1,7 @@
 import { prisma } from "../../database/database.js";
 import type { Project } from "../../database/models/project.js";
 import type { PrismaClient } from "../../generated/prisma/client.js";
-import type { IProject } from "./project.type.js";
+import type { IProject, IProjectUpdate } from "./project.type.js";
 
 export class ProjectRepository {
   constructor(private readonly database: PrismaClient = prisma) {}
@@ -51,22 +51,29 @@ export class ProjectRepository {
     return await this.database.project.delete({ where: { id } });
   }
 
-  async updateProject(id: string, data: any) {
-    const { id: _, technologies, challenges, ...projectData } = data;
-    return await this.database.project.update({
+  async updateProject(id: string, data: IProjectUpdate) {
+    const { technologyIds, challengeIds, ...projectData } = data;
+
+    return prisma.project.update({
       where: { id },
       data: {
         ...projectData,
-        ...(technologies && {
+
+        ...(technologyIds && {
           technologies: {
-            set: technologies.map((techId: string) => ({ id: techId })),
+            set: technologyIds.map((id) => ({ id })),
           },
         }),
-        ...(challenges && {
+
+        ...(challengeIds && {
           challenges: {
-            set: challenges.map((challengeId: string) => ({ id: challengeId })),
+            set: challengeIds.map((c) => ({ id: c.id })),
           },
         }),
+      },
+      include: {
+        technologies: true,
+        challenges: true,
       },
     });
   }

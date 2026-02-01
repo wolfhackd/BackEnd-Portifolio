@@ -18,27 +18,27 @@ const projectController = new ProjectController(projectService);
 export const projectRoute = async (app: FastifyInstance) => {
   app.post(
     "/project",
-    { schema: createProjectSchema },
+    // { schema: createProjectSchema },
     projectController.createProject,
   );
   app.get(
     "/project",
-    { schema: listProjectsSchema },
+    // { schema: listProjectsSchema },
     projectController.listProjects,
   );
   app.delete(
     "/project-delete/:id",
-    { schema: deleteProjectSchema },
+    // { schema: deleteProjectSchema },
     projectController.deleteProject,
   );
   app.get(
     "/project/:id",
-    { schema: getProjectSchema },
+    // { schema: getProjectSchema },
     projectController.getProject,
   );
   app.put(
     "/project/:id",
-    { schema: updateProjectSchema },
+    // { schema: updateProjectSchema },
     projectController.updateProject,
   );
 };

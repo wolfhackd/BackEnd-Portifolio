@@ -1,5 +1,9 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
-import { createProjectInput, ProjectInput } from "./project.type.js";
+import {
+  createProjectInput,
+  ProjectInput,
+  ProjectUpdateInput,
+} from "./project.type.js";
 import type { ProjectService } from "./project.service.js";
 
 export class ProjectController {
@@ -92,7 +96,7 @@ export class ProjectController {
         return reply.status(400).send({ error: "Invalid id" });
       }
 
-      const data = ProjectInput.parse(req.body);
+      const data = ProjectUpdateInput.parse(req.body);
 
       if (!data) {
         return reply.status(400).send({ error: "Invalid data" });

@@ -1,6 +1,10 @@
 import { Project } from "../../database/models/project.js";
 import type { ProjectRepository } from "./project.repository.js";
-import type { ICreateProject, IProject } from "./project.type.js";
+import type {
+  ICreateProject,
+  IProject,
+  IProjectUpdate,
+} from "./project.type.js";
 
 export class ProjectService {
   constructor(private readonly projectRepository: ProjectRepository) {}
@@ -25,7 +29,7 @@ export class ProjectService {
     return await this.projectRepository.getProject(id);
   };
 
-  public updateProject = async (id: string, data: IProject) => {
+  public updateProject = async (id: string, data: IProjectUpdate) => {
     return await this.projectRepository.updateProject(id, data);
   };
 }
