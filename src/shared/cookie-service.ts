@@ -8,7 +8,7 @@ export class CookieService {
       signed: true,
       secure: env.NODE_ENV === "production", // true só no Render/HTTPS
       path: "/",
-      sameSite: "lax",
+      sameSite: "none",
       maxAge: 60 * 60 * 24,
     });
   }
@@ -17,7 +17,7 @@ export class CookieService {
     response.clearCookie("token", {
       path: "/",
       secure: env.NODE_ENV === "production",
-      sameSite: "lax",
+      sameSite: "none",
     });
   }
 }
