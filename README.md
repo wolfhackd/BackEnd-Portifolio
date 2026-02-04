@@ -1,16 +1,17 @@
-# Este é o repositório do backend do meu portifólio de desenvolvedor.
+# 🚀 Backend do Portfólio de Desenvolvedor
+API responsável por gerenciar os dados do meu portfólio de desenvolvedor, incluindo autenticação, projetos, desafios, tecnologias e integrações externas.
+<br>
 
-## Stack
+## 🧰 Stack Utilizada
 
 <ul>
-<li>Tecnologias</li>
 <li>Node.js</li>
 <li>TypeScript</li>
 <li>Fastify</li>
-<li>Prisma</li>
+<li>Prisma ORM</li>
 <li>PostgreSQL</li>
-<li>JWT</li>
-<li>Swagger</li>
+<li>JWT (Autenticação)</li>
+<li>Swagger (Documentação da API)</li>
 <li>GitHub OAuth</li>
 </ul>
 
@@ -18,37 +19,81 @@
 
 O projeto está organizado da seguinte forma:
 
-src: contém a lógica do aplicativo
-modules: contém os módulos do aplicativo
-auth: módulo de autenticação
-category: módulo de categorias
-challenge: módulo de desafios
-project: módulo de projetos
-technology: módulo de tecnologias
-providers: módulo de provedores
-github: módulo de autenticação com GitHub
-database: contém a configuração do banco de dados
-shared: contém componentes compartilhados
-cookie-service: serviço de cookies
-jwtService: serviço de JWT
-prisma: contém o arquivo de configuração do Prisma
-config: contém os arquivos de configuração do ambiente
-seed: contém scripts de seed para o Prisma
-types: contém tipos personalizados
-Como executar o projeto
-Certifique-se de ter o Node.js e o TypeScript instalados em sua máquina.
-Clone o repositório em sua máquina local.
-Instale as dependências do projeto executando npm install ou yarn install.
-Configure as variáveis de ambiente de acordo com o arquivo .env.example.
-Execute npm run prisma:migrate ou yarn prisma:migrate para gerar as migrações do Prisma.
-Execute npm run dev ou yarn dev para iniciar o servidor.
-Como usar a API
-A API está documentada usando o Swagger. Você pode acessá-la em http://localhost:3000/docs.
+src/<br>
+│<br>
+├── modules/            # Módulos principais da aplicação<br>
+│   ├── auth/           # Autenticação de usuários<br>
+│   ├── category/       # Gerenciamento de categorias<br>
+│   ├── challenge/      # Módulo de desafios<br>
+│   ├── project/        # Módulo de projetos<br>
+│   ├── technology/     # Módulo de tecnologias<br>
+│   └── providers/      # Integrações e provedores externos<br>
+│       └── github/     # Autenticação via GitHub<br>
+│<br>
+├── database/           # Configuração de conexão com o banco de dados<br>
+│<br>
+├── shared/             # Recursos compartilhados em toda a aplicação<br>
+│   ├── cookie-service/ # Serviço de manipulação de cookies<br>
+│   └── jwtService/     # Serviço de geração e validação de JWT<br>
+│<br>
+├── prisma/             # Configuração do Prisma ORM<br>
+│   └── seed/           # Scripts de seed do banco de dados<br>
+│<br>
+├── config/             # Arquivos de configuração do ambiente<br>
+│<br>
+└── types/              # Tipos e interfaces personalizados<br>
 
-# Contribuição
+## ⚙️ Como Executar o Projeto
 
-Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou enviar um pull request com melhorias ou correções.
+### 1️⃣ Pré-requisitos
 
-# Licença
+1. Node.js instalado
 
+2. PostgreSQL rodando
+
+3. Gerenciador de pacotes (npm ou yarn)
+
+### 2️⃣ Clonar o repositório
+```
+git clone <URL_DO_REPOSITORIO>
+cd nome-do-projeto
+```
+
+### 3️⃣ Instalar dependências
+
+````
+npm install
+# ou
+yarn install
+````
+
+## 4️⃣ Configurar variáveis de ambiente
+Crie um arquivo .env baseado no .env.test
+
+## 5️⃣ Rodar migrações do banco
+````
+npm run prisma:migrate
+````
+## 6️⃣ Popular o banco (importante para tubir as categorias)
+````
+npm run prisma:seed
+````
+## 7️⃣ Iniciar o servidor
+````
+npm run dev
+````
+
+##📘 Documentação da API
+
+A API possui documentação interativa via Swagger:
+
+👉 http://localhost:3000/docs
+
+
+# 🤝 Contribuição
+
+Contribuições são bem-vindas!
+Sinta-se à vontade para abrir issues ou enviar pull requests com melhorias.
+
+# 📄 Licença
 Este projeto está licenciado sob a MIT License.
